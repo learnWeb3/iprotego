@@ -1,0 +1,6 @@
+mongo_data
+postgres_data
+keycloak_data
+node_modules
+api_data
+.DS_Store

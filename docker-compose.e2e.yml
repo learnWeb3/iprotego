@@ -1,0 +1,59 @@
+services:
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    volumes:
+      - "./mongo_data:/data/db"
+      - "./init/mongo/docker-entrypoint-initdb.js:/docker-entrypoint-initdb.d/docker-entrypoint-initdb.js"
+    env_file:
+      - ./.env.docker.mongo.development
+    networks:
+      - mongo
+    # # use it to administer the database
+    ports:
+      - 27017:27017
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    env_file: ./.env.docker.keycloak_postgres.development
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - keycloak
+  keycloak:
+    platform: linux/amd64
+    image: antoineleguillou/keycloak:24.0
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: keycloak.Dockerfile
+    ports:
+      - 8080:8080
+    env_file:
+      - ./.env.docker.keycloak.development
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl http://localhost:8080/health/ready --fail || exit 1",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - ./keycloak_data:/opt/keycloak/data/
+      - ./init/themes/:/opt/keycloak/themes/
+      - ./init/backup/2024-09-06.json:/opt/keycloak/data/import/2024-09-06.json
+    networks:
+      - keycloak
+networks:
+  # api:
+  keycloak:
+  mongo:
