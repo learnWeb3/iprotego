@@ -4,12 +4,12 @@
         ${msg("loginAccountTitle")}
     <#elseif section = "form">
         <form  id="kc-form-login" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post" class="w-full lg:w-2/3 flex flex-col gap-8 mt-8">
-          <h1 class="font-bold text-3xl">Login</h1>
+          <h1 class="font-bold text-3xl">  ${msg("loginAccountTitle")} </h1>
           <div class="flex flex-col gap-6">
             <div class="flex flex-col gap-2">
               <input
                 type="email"
-                placeholder="Email *"
+                placeholder="${msg('email')} *"
                 class="px-4 rounded text-md h-[3rem] border-[1px] border-[#0000006b] focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                 tabindex="1" 
                 id="username" 
@@ -24,7 +24,7 @@
             <div class="flex flex-col gap-2">
               <input
                 type="password"
-                placeholder="Password *"
+                placeholder="${msg('password')} *"
                 class="px-4 rounded text-md h-[3rem] border-[1px] border-[#0000006b] focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                 tabindex="2" 
                 id="password" 
@@ -43,7 +43,7 @@
 
             <#if realm.resetPasswordAllowed>
                 <a href="${url.loginResetCredentialsUrl}" class="text-sm font-light underline w-full text-center">
-                    Forgot your password ?
+                     ${msg("loginResetCredentialsLabel")}
                 </a>
             </#if>
 
@@ -53,14 +53,14 @@
             </div>
 
             <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
-                <a tabindex="6" class="text-sm font-light underline w-full text-center" href="${url.registrationUrl}">Sign up</a>
+                <a tabindex="6" class="text-sm font-light underline w-full text-center" href="${url.registrationUrl}"> ${msg("registerLinkLabel")}</a>
             </#if>
 
             <#if realm.password && social.providers??>
                 <div class="flex items-center justify-center gap-4 w-full">
                     <div class="w-1/5 lg:w-2/6 h-[1px] bg-[#0000006b]"></div>
                     <div class="w-2/5 lg:w-2/6 flex items-center justify-center">
-                        <a href="">Log in with</a>
+                        <a href=""> ${msg("loginAlternative")}</a>
                     </div>
                     <div class="w-1/5 lg:w-2/6 h-[1px] bg-[#0000006b]"></div>
                 </div>

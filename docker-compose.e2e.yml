@@ -7,9 +7,6 @@ services:
       - "./init/mongo/docker-entrypoint-initdb.js:/docker-entrypoint-initdb.d/docker-entrypoint-initdb.js"
     env_file:
       - ./.env.docker.mongo.development
-    networks:
-      - mongo
-    # # use it to administer the database
     ports:
       - 27017:27017
   postgres:
@@ -25,8 +22,6 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
-    networks:
-      - keycloak
   keycloak:
     platform: linux/amd64
     image: antoineleguillou/keycloak:24.0
@@ -45,15 +40,13 @@ services:
           "curl http://localhost:8080/health/ready --fail || exit 1",
         ]
       interval: 30s
-      timeout: 5s
+      timeout: 180s
       retries: 10
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
     volumes:
       - ./keycloak_data:/opt/keycloak/data/
       - ./init/themes/:/opt/keycloak/themes/
       - ./init/backup/2024-09-06.json:/opt/keycloak/data/import/2024-09-06.json
-    networks:
-      - keycloak
-networks:
-  # api:
-  keycloak:
-  mongo:

@@ -5,13 +5,13 @@
         ${msg("registerTitle")}
     <#elseif section="form">
         <form id="kc-register-form" action="${url.registrationAction}" method="post" class="w-full lg:w-2/3 flex flex-col gap-8 mt-16">
-            <h1 class="font-bold text-3xl">Register</h1>
+            <h1 class="font-bold text-3xl"> ${msg("registerTitle")} </h1>
             <div class="flex flex-col gap-6">
                 <div class="flex gap-2 w-full">
                     <div class="flex flex-col gap-2 w-1/2">
                         <input
                             type="text"
-                            placeholder="Firstname *"
+                            placeholder="${msg('firstName')} *"
                             class="px-4 rounded text-md h-[3rem] border-[1px] border-[#0000006b] focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                             type="text"
                             id="firstName"
@@ -27,7 +27,7 @@
                     <div class="flex flex-col gap-2 w-1/2">
                         <input
                             type="text"
-                            placeholder="Lastname *"
+                            placeholder="${msg('lastName')} *"
                             class="px-4 rounded text-md h-[3rem] border-[1px] border-[#0000006b] focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                             type="text"
                             id="lastName"
@@ -45,7 +45,7 @@
                 <div class="flex flex-col gap-2">
                     <input
                         type="email"
-                        placeholder="Email *"
+                        placeholder="${msg('email')} *"
                         class="px-4 rounded text-md h-[3rem] border-[1px] border-[#0000006b] focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                         id="email"
                         class="${properties.kcInputClass!}"
@@ -63,7 +63,7 @@
                     <div class="flex flex-col gap-2">
                         <input
                             type="text"
-                            placeholder="Username *"
+                            placeholder="${msg('username')} *"
                             class="px-4 rounded text-md h-[3rem] border-[1px] border-[#0000006b] focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                             id="username"
                             name="username"
@@ -81,7 +81,7 @@
                     <div class="flex flex-col gap-2">
                         <input
                             type="password"
-                            placeholder="Password *"
+                            placeholder="${msg('password')} *"
                             class="px-4 rounded text-md h-[3rem] border-[1px] border-[#0000006b] focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                             id="password"
                             name="password"
@@ -96,7 +96,7 @@
                     <div class="flex flex-col gap-2">
                         <input
                             type="password"
-                            placeholder="Password confirmation *"
+                            placeholder="${msg('passwordConfirm')} *"
                             class="px-4 rounded text-md h-[3rem] border-[1px] border-[#0000006b] focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                             id="password-confirm"
                             name="password-confirm"
@@ -111,12 +111,12 @@
                 <div>
                     <input tabindex="4" class="cursor-pointer h-12 bg-gray-900 hover:bg-black transition duration-150 ease-in-out rounded-full w-full text-white text-center" type="submit" value="Register" />
                 </div>
-                <a tabindex="6" class="text-sm font-light underline w-full text-center" href="${url.loginUrl}">Login</a>
+                <a tabindex="6" class="text-sm font-light underline w-full text-center" href="${url.loginUrl}"> ${msg("registerLinkLabel")}</a>
                 <#if realm.password && social.providers??>
                     <div class="flex items-center justify-center gap-4 w-full">
                         <div class="w-1/5 lg:w-2/6 h-[1px] bg-[#0000006b]"></div>
                         <div class="w-2/5 lg:w-2/6 flex items-center justify-center">
-                            <a href="">Register with</a>
+                            <a href=""> ${msg("registerAlternative")} </a>
                         </div>
                         <div class="w-1/5 lg:w-2/6 h-[1px] bg-[#0000006b]"></div>
                     </div>

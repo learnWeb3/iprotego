@@ -39,7 +39,7 @@ export function FileUploaderSuccess({
           <li className="py-4">Le fichier nous à été transmis avec succès.</li>
         </ul>
 
-        <Button onclick={close} label="Clear data" />
+        <Button onclick={close} label="Revenir au formulaire" />
       </div>
     </div>
   );

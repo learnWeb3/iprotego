@@ -10,7 +10,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CreateFileDto } from '../../lib/dto/create-file.dto';
 import { CustomerService } from '../../customer/customer/customer.service';
 import { CustomerDocument } from '../../customer/customer/customer.schemas';
-import { FileDocument } from './file.schemas';
+import { File, FileDocument } from './file.schemas';
 import { v4 as uuid } from 'uuid';
 import { move } from 'fs-extra';
 import {

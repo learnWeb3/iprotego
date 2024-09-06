@@ -45,7 +45,7 @@ services:
           "curl http://localhost:8080/health/ready --fail || exit 1",
         ]
       interval: 30s
-      timeout: 5s
+      timeout: 180s
       retries: 10
     volumes:
       - ./keycloak_data:/opt/keycloak/data/
@@ -53,6 +53,10 @@ services:
       - ./init/backup/2024-09-06.json:/opt/keycloak/data/import/2024-09-06.json
     networks:
       - keycloak
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
   api:
     image: antoineleguillou/iprotego-api:demo
     build:
@@ -61,6 +65,13 @@ services:
     networks:
       - keycloak
       - mongo
+    depends_on:
+      mongo:
+        condition: service_started
+        restart: true
+      keycloak:
+        condition: service_healthy
+        restart: true
     env_file:
       - .env.backend.development
     ports:
@@ -69,6 +80,10 @@ services:
       - ./api_data/uploads:/usr/share/app/uploads
   web:
     image: antoineleguillou/iprotego-app:demo
+    depends_on:
+      api:
+        condition: service_started
+        restart: true
     build:
       context: ./app
       dockerfile: ./dev.Dockerfile

@@ -29,6 +29,9 @@ async function getUserToken(
     })
     .then((response) => {
       return response.data.access_token;
+    })
+    .catch((error) => {
+      console.log(error);
     });
 }
 

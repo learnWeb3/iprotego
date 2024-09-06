@@ -1,5 +1,19 @@
 # Iprotego
 
+This is an authenticated file uploader linked to a third party identity provider.
+The developped solution builds upon the architecture schema 2b described in the initial project scoping document.
+A mongo db database has been added in order to save documents relations to a user uploading it which was out of the scope of the project.
+
+## Service list
+
+The platform has been divided in multiple services here is a breakdown.
+
+- MongoDB database (application data)
+- PostgreSQL database (keycloak datas)
+- Keycloak third party identity provider (JAVA)
+- Iprotego API (NestJS)
+- Iprotego app (NextJS)
+
 ## iprotego app
 
 This repository contains the code related to the iprotego api user interface in order to upload files.
@@ -49,24 +63,43 @@ admin password: sNV69zUP2CTs
 ## Quick start (developement)
 
 ```bash
+# for bind mount rights on the host
+chown -R $USER ./iprotego
 # build docker images
 docker compose build
 # start up the containers
 docker compose up -d
+# wait until all containers are healthy (might take few minutes on the first run - due to the initilization of databases)
+docker ps
 # open your browser and go to
 http://localhost:3001
+# when you are done and want to erase all data and containers
+# docker rm -f $(docker ps -aq)
+# docker system prune
+# rm -rf keycloak_data mongo_data postgres_data api_data
 ```
 
 ## Tests
 
 ```bash
+# for bind mount rights on the host
+chown -R $USER ./iprotego
+# build docker images
+docker compose build
 # run end to end tests as described above using sepecific docker-compose file in detach mode
 docker compose -f ./docker-compose.e2e.yml up -d
-# Please double check service are healthy before running the tests
+# wait until all containers are healthy (might take few minutes on the first run - due to the initilization of databases)
 docker ps
-# Running the tests
+# change to the api directory
 cd api
+# install dependencies
+npm i
+# Running the tests
 npm run test:e2e
+# when you are done and want to erase all data and containers
+# docker rm -f $(docker ps -aq)
+# docker system prune
+# rm -rf keycloak_data mongo_data postgres_data
 ```
 
 ## Docker
