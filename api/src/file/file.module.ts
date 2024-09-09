@@ -3,7 +3,7 @@ import { CustomerService } from '../customer/customer/customer.service';
 import { FileService } from './file/file.service';
 import { CustomerModule } from '../customer/customer.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { FileSchema } from './file/file.schemas';
+import { File, FileSchema } from './file/file.schemas';
 import {
   Customer,
   CustomerSchema,

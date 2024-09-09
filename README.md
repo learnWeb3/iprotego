@@ -92,6 +92,8 @@ docker compose -f ./docker-compose.e2e.yml up -d
 docker ps
 # change to the api directory
 cd api
+# create uploads and temp directory if noit exists 
+mkdir -p uploads temp
 # install dependencies
 npm i
 # Running the tests
